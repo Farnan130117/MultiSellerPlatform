@@ -1,4 +1,6 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}} <!-- Commenting in blade style-->
+
+@extends('layouts.main')
 
 @section('content')
 <div class="container">
