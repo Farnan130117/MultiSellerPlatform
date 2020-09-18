@@ -7,7 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+      {{-- {{ config('app.name', 'Laravel') }} --}} 
+      
+     MSP
+    </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,13 +22,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Font Awosome CSS link from https://cdnjs.com/libraries/font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <!--{{ config('app.name', 'Laravel') }} -->
+                    MSP
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -38,6 +47,27 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <!-- CART START -->
+
+                        <li class="nav-item">
+                            
+                                <a class="nav-link p-0 m-0" href="{{ route('cart.index') }}">
+                                <i class="fas fa-shopping-cart text-danger fa-2x "></i>
+                                Cart
+                                <span class="badge badge-pill badge-primary">
+                                <div class="badge">
+                                  <!-- Showing all products total quantity  -->
+                                  <!--  {{Cart::session(auth()->id())->getTotalQuantity()}}  -->  
+
+                                  <!-- Counnting only total number of products  -->
+                                  {{Cart::session(auth()->id())->getcontent()->count()}}
+                                </div>
+                                </span>
+                                </a>
+                            
+                        </li>
+                        <!-- CART END -->
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -72,7 +102,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 container">
             @yield('content')
         </main>
     </div>
