@@ -50,20 +50,28 @@
                         <!-- CART START -->
 
                         <li class="nav-item">
-                            
+                             
                                 <a class="nav-link p-0 m-0" href="{{ route('cart.index') }}">
+
                                 <i class="fas fa-shopping-cart text-danger fa-2x "></i>
-                                Cart
+                                
+                                @auth
                                 <span class="badge badge-pill badge-primary">
                                 <div class="badge">
                                   <!-- Showing all products total quantity  -->
                                   <!--  {{Cart::session(auth()->id())->getTotalQuantity()}}  -->  
 
                                   <!-- Counnting only total number of products  -->
+                                  
                                   {{Cart::session(auth()->id())->getcontent()->count()}}
+                                  
                                 </div>
                                 </span>
+                                @else 
+                                0
+                                @endauth
                                 </a>
+
                             
                         </li>
                         <!-- CART END -->
@@ -78,7 +86,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
+                            @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
