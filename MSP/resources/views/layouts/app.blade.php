@@ -55,7 +55,7 @@
 
                                 <i class="fas fa-shopping-cart text-danger fa-2x "></i>
                                 
-                                @auth
+                            @auth
                                 <span class="badge badge-pill badge-primary">
                                 <div class="badge">
                                   <!-- Showing all products total quantity  -->
@@ -67,9 +67,15 @@
                                   
                                 </div>
                                 </span>
-                                @else 
+
+                            @else 
+
+                                <span class="badge badge-pill badge-primary">
+                                <div class="badge">
                                 0
-                                @endauth
+                                </div>
+                                </span>
+                            @endauth
                                 </a>
 
                             

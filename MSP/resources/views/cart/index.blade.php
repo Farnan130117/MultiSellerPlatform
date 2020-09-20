@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container">
+	<p>Your Cart</p>
 
 <!-- not a good practice -->
 <!--
@@ -52,7 +53,7 @@
 	Total Price: {{\Cart::session(auth()->id())->getTotal()}} BDT
 </h2>
 
-<a href="#" class="btn btn-primary" role="button"> Proceed Checkout</a>
+<a href="{{route('cart.checkout')}}" class="btn btn-primary" role="button"> Proceed Checkout</a>
  
 </div>
 

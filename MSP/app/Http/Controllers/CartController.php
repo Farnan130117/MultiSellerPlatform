@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    //
+    // cart related functions start
 
+
+   // add products to the cart
      public function add(Product $product)//$productId
     {
         //
@@ -32,6 +34,7 @@ class CartController extends Controller
 
     }
 
+   //cart index with all products
     public function index()
     {
 
@@ -41,7 +44,7 @@ class CartController extends Controller
         return view('cart.index', compact('cartItems'));
     }
 
-
+   // destroy cart element
     public function destroy($itemId)
     {
 
@@ -50,6 +53,7 @@ class CartController extends Controller
         return back();
     }
 
+   // update cart
     public function update($rowId)
     {
 
@@ -62,4 +66,15 @@ class CartController extends Controller
 
         return back();
     }
+
+    
+
+    // checkout 
+ 	public function checkout()
+    {
+    	return view('cart.checkout');
+    }
+
+    // cart related functions end
+
 }
