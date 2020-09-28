@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
+use App\ProductOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class OrderController extends Controller
+class ProductOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +36,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
        // dd($request->all());
 
         // validate form data
@@ -49,9 +49,9 @@ class OrderController extends Controller
             'payment_method' => 'required',
         ]);
 
-        $order = new Order(); // create new order
+        $order = new ProductOrder(); // create new productorder
 
-        $order->order_number = uniqid('OrderNumber-');  // Unique order number
+        $order->product_order_number = uniqid('ProductOrderNumber-');  // Unique order number
 
         $order->shipping_fullname = $request->input('shipping_fullname'); // Coming from checkout form
         $order->shipping_state = $request->input('shipping_state');       // Coming from checkout form
@@ -103,11 +103,41 @@ class OrderController extends Controller
         }
 
         //payment
-        if(request('payment_method') == 'paypal') {
+        
+      //  if(request('payment_method') == 'paypal') {
                 //redirect to paypal
            // return redirect()->route('paypal.checkout', $order->id);
 
+      //  }
+
+        if(request('payment_method') == 'ssl-commerz') {
+
+          //  $tempid=$order->id;
+            
+           //$name=$request->input('shipping_fullname');
+
+        //  $data = DB::select('select shipping_fullname from product_orders where ('id', $tempid)');
+         //   $data = DB::table('product_orders')->where('id',$tempid)->get();
+            $articles = ['Article 1','Article 2','Article 3'];
+            return redirect()->route('example2',['articles' => $articles]);
+           /*
+            $data = array (
+            'title'=>'My App yo',
+            'Description'=>'This is New Application',
+            'author'=>'foo'
+             );
+             */
+           //redirect to SSL-PAY
+           // return redirect()->route('example2');
+           // return redirect('/example2', compact('name'));
+           // return redirect()->route('example2', compact('data'));
+          // return redirect('/example2',compact('name'));
+           
+            // return "SSL test";
+
         }
+
+
          //empty cart
          \Cart::session(auth()->id())->clear();
 
@@ -126,10 +156,10 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\ProductOrder  $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(ProductOrder $productOrder)
     {
         //
     }
@@ -137,10 +167,10 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\ProductOrder  $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(ProductOrder $productOrder)
     {
         //
     }
@@ -149,10 +179,10 @@ class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param  \App\ProductOrder  $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, ProductOrder $productOrder)
     {
         //
     }
@@ -160,10 +190,10 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\ProductOrder  $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(ProductOrder $productOrder)
     {
         //
     }

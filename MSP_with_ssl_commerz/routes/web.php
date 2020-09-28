@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::redirect('/','/home');
 
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -31,24 +33,17 @@ Route::get('/cart/destroy/{itemId}', 'CartController@destroy')->name('cart.destr
 Route::get('/cart/update/{itemId}', 'CartController@update')->name('cart.update')->middleware('auth');
 Route::get('/cart/checkout', 'CartController@checkout')->name('cart.checkout')->middleware('auth');
 
-Route::resource('orders', 'OrderController')->middleware('auth');
 
-                            //paypal start
-/*
-
-Route::get('paypal/checkout', 'PayPalController@getExpressCheckout')->name('paypal.checkout');
-Route::get('paypal/checkout-success/{order}', 'PayPalController@getExpressCheckoutSuccess')->name('paypal.success');
-Route::get('paypal/checkout-cancel', 'PayPalController@cancelPage')->name('paypal.cancel');
-
-*/
-                           //paypal start
+Route::resource('product_orders', 'ProductOrderController')->middleware('auth');
 
 
-                         // SSLCOMMERZ Start
+
+// SSLCOMMERZ Start
 Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
-Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout')->name('example2')->middleware('auth');
+//Route::post('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');//
 
-Route::post('/pay', 'SslCommerzPaymentController@index');
+Route::post('/pay', 'SslCommerzPaymentController@index')->middleware('auth');
 Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
 
 Route::post('/success', 'SslCommerzPaymentController@success');
@@ -56,4 +51,9 @@ Route::post('/fail', 'SslCommerzPaymentController@fail');
 Route::post('/cancel', 'SslCommerzPaymentController@cancel');
 
 Route::post('/ipn', 'SslCommerzPaymentController@ipn');
-                          //SSLCOMMERZ END
+//SSLCOMMERZ END
+
+/*
+Route::get('/cod_feedback', 'SslCommerzPaymentController@COD_feedback')->name('cod_feedback')->middleware('auth');
+//customized by farnan
+*/
