@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\ProductOrder;
+use App\User;
+use Auth;
 //use DB;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 //use Illuminate\Http\RedirectResponse;
@@ -25,6 +29,7 @@ class SslCommerzPaymentController extends Controller
     {
         return view('exampleHosted');
     }
+
 
     public function index(Request $request)
     {
@@ -170,7 +175,8 @@ class SslCommerzPaymentController extends Controller
            //  return view('/home');
            //return redirect('/success'); 
           //  return redirect()->route('home');
-           return redirect('home')->with('status', 'Order Completed, Shop Now!');
+         //  return redirect('home')->with('status', 'Order Completed, Shop Now!');
+            return redirect('home')->with('status', 'Order Completed, Shop Now!');
            //  return redirect()->action('SslCommerzPaymentController@COD_feedback');
             /*
             echo
@@ -214,6 +220,7 @@ class SslCommerzPaymentController extends Controller
                 print_r($payment_options);
                 $payment_options = array();
             }
+
        }
 
 
@@ -320,8 +327,27 @@ class SslCommerzPaymentController extends Controller
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
 
-             //   echo "<br >Transaction is successfully Completed";
-                return redirect('home')->with('status', 'Transaction Completed, Shop Now!');
+                //farnan
+               $userID = ProductOrder::select ('user_id')-> where('product_order_number',$tran_id)->get();
+            // return Auth::loginUsingId($userID);
+
+              // dd($userID);
+
+              //  echo "<br >Transaction is successfully Completed";
+              // $user = User::select ('email')->where('id',$userID)->get();
+               $user = User::where('id',$userID)->get();
+               /*
+               if($user){
+                Auth::login($user); // login user automatically
+                return redirect('home');
+                        }
+                */
+               // Auth::loginUsingId($user);
+               // Auth::login($user);
+               // dd($user);
+            return redirect('home')->with('status', 'Transaction Completed, Shop Now!');
+                
+              
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.

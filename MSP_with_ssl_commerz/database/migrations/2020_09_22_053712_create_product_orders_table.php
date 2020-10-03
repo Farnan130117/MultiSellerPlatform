@@ -22,6 +22,7 @@ class CreateProductOrdersTable extends Migration
             $table->unsignedBigInteger('user_id'); // auth user
             $table->enum('status', ['pending','processing','completed','decline'])->default('pending'); 
             // order status
+            $table->boolean('is_paid')->default(false);//Payment status
             $table->float('grand_total'); // coming from cart session
             $table->integer('item_count'); // coming from cart session
             $table->boolean('is_paid')->default(false);

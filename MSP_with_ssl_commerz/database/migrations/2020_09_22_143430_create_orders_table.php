@@ -23,7 +23,10 @@ class CreateOrdersTable extends Migration
             $table->string('amount')->nullable;
             $table->string('address')->nullable;
             $table->string('status')->nullable;
-            $table->string('transaction_id')->nullable;
+            //$table->string('transaction_id')->nullable;
+            $table->foreign('transaction_id')->references('product_order_number')->on('product_orders')->onDelete('cascade'); 
+            //linked orders table with product_orders with the foreign key(product_order_number)
+
             $table->string('currency')->nullable;
             
             //

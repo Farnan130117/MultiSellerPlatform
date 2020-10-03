@@ -9,6 +9,7 @@ class CartController extends Controller
 {
     //
 
+
      public function add(Product $product)//$productId
     {
         //

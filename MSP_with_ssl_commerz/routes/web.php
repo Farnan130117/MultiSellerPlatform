@@ -33,6 +33,7 @@ Route::get('/cart/destroy/{itemId}', 'CartController@destroy')->name('cart.destr
 Route::get('/cart/update/{itemId}', 'CartController@update')->name('cart.update')->middleware('auth');
 Route::get('/cart/checkout', 'CartController@checkout')->name('cart.checkout')->middleware('auth');
 
+Route::get('/success_payment', 'CartController@success_payment');//->middleware('auth');
 
 Route::resource('product_orders', 'ProductOrderController')->middleware('auth');
 
@@ -57,3 +58,7 @@ Route::post('/ipn', 'SslCommerzPaymentController@ipn');
 Route::get('/cod_feedback', 'SslCommerzPaymentController@COD_feedback')->name('cod_feedback')->middleware('auth');
 //customized by farnan
 */
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
