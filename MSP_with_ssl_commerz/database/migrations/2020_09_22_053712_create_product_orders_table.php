@@ -25,7 +25,7 @@ class CreateProductOrdersTable extends Migration
             $table->boolean('is_paid')->default(false);//Payment status
             $table->float('grand_total'); // coming from cart session
             $table->integer('item_count'); // coming from cart session
-            $table->boolean('is_paid')->default(false);
+          //  $table->boolean('is_paid')->default(false);
           //  $table->enum('payment_method', ['cash_on_delivery','ssl_commerz','paypal','stripe','card'])->default('cash_on_delivery');
 
             $table->enum('payment_method', ['cash_on_delivery','ssl_commerz','paypal','stripe','card']);

@@ -174,7 +174,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * Added for Orangehill issed by farnan...
+         */
 
+        'Orangehill\Iseed\IseedServiceProvider'
     ],
 
     /*
