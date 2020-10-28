@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\ProductOrder;
 use App\User;
+use App\Order;
+use App\Mail\OrderPaid;
 use Auth;
 //use DB;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 
@@ -327,15 +330,39 @@ class SslCommerzPaymentController extends Controller
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
 
-                //farnan
+            //farnan
                $userID = ProductOrder::select ('user_id')-> where('product_order_number',$tran_id)->get();
             // return Auth::loginUsingId($userID);
 
               // dd($userID);
 
               //  echo "<br >Transaction is successfully Completed";
-              // $user = User::select ('email')->where('id',$userID)->get();
-               $user = User::where('id',$userID)->get();
+              // $userEmail = User::select ('email')->where('id',$userID)->get();
+              //  dd($userEmail);
+
+              // $user = User::where('id',$userID)->get();
+              // $user = User::find($userID);
+             //  $user = User::find($userID, ['id', 'email']);
+               $user = User::find($userID, ['email']);
+                
+            //dd($user);
+               /*
+              
+               $product_order = DB::table('product_orders')
+                    ->where('product_order_number', $tran_id)
+                    ->get();
+               */
+                    /* Sent mail with ProductOrder model*/
+               $product_order = ProductOrder::where('product_order_number',$tran_id)->first();
+             //  dd($product_order);
+               Mail::to($user)->send(new OrderPaid($product_order));
+
+                     /* Sent mail with Order model*/
+            //  $order = Order::where('transaction_id',$tran_id)->first();
+            //  Mail::to($user)->send(new OrderPaid($order));
+
+              // Mail::to($user)->send(new OrderPaid($product_order));
+                
                /*
                if($user){
                 Auth::login($user); // login user automatically
@@ -362,7 +389,8 @@ class SslCommerzPaymentController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            echo "Transaction is successfully Completed";
+            //echo "Transaction is successfully Completed";
+            return redirect('home')->with('status', 'Transaction Completed, Shop Now!');
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
             echo "Invalid Transaction";
