@@ -43,7 +43,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    <!--shop -->
                     <ul class="navbar-nav mr-auto">
+
+                        <li class="nav-item">
+                            
+                                <a class="nav-link" href="{{ route('shops.create') }}">Open your shop</a>
+                            
+                            </li>
 
                     </ul>
 

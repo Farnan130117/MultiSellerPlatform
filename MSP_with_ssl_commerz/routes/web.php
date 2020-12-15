@@ -37,6 +37,8 @@ Route::get('/cart/checkout', 'CartController@checkout')->name('cart.checkout')->
 
 Route::resource('product_orders', 'ProductOrderController')->middleware('auth');
 
+//shop
+Route::resource('shops', 'ShopController')->middleware('auth');
 
 
 // SSLCOMMERZ Start

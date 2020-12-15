@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'role_id' => NULL,
+                'role_id' => 2,
                 'name' => 'Rabinsoncruso',
                 'email' => 'Robinsoncruso@example.com',
                 'avatar' => 'users/default.png',
@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'role_id' => NULL,
+                'role_id' => 2,
                 'name' => 'testuser',
                 'email' => 'testuser@example.com',
                 'avatar' => 'users/default.png',
