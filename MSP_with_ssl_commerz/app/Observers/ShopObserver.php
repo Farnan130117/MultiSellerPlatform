@@ -44,13 +44,13 @@ class ShopObserver
                     */
                     //$shop->owner->setRole('seller'); 
                     
-                    if($shop->owner->hasRole('admin'))
+                    if($shop->owner->hasRole('admin')) //check user role is admin
                     {
 
                     }
-                    else
+                    else //If user role is normal user then chage role to seller
                     {
-                    $shop->owner->setRole('seller');
+                        $shop->owner->setRole('seller');
                     }
                     }
              else {

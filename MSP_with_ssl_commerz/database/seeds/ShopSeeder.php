@@ -12,5 +12,7 @@ class ShopSeeder extends Seeder
     public function run()
     {
         //
+         factory(App\Shop::class)->create(['user_id'=>6]); //user-id=6 means seller 1
+          factory(App\Shop::class)->create(['user_id'=>8]); //user-id=8 means mspadmin
     }
 }
